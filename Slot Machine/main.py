@@ -1,5 +1,14 @@
 import random
 
+symbol_prize = {
+    "[%]": 5,
+    "[A]": 10,
+    "[$]": 20,
+    "[o]": 15,
+    "[*]": 25,
+    "[X]": 30,
+    "[7]": 50
+    }
 symbols = ["[%]","[A]","[$]","[o]","[*]","[X]","[7]","[X]",
            "[o]","[A]","[%]","[*]","[$]","[%]","[*]","[$]",
            "[%]","[o]","[A]","[X]","[*]","[%]","[A]","[7]","[$]","[o]",
@@ -34,7 +43,22 @@ third_row = all(slot_line_X[2][i] == slot_line_X[2][0] for i in range(1, 3))
 diagonal_left_right = all(slot_line_X[i][i] == slot_line_X[0][0] for i in range(1, 3))
 diagonal_right_left = all(slot_line_X[i][2 - i] == slot_line_X[0][2] for i in range(1,3))
 
-print(first_row,second_row,third_row,diagonal_left_right,diagonal_right_left,)
+if first_row or second_row or third_row or diagonal_right_left or diagonal_left_right:
+    if first_row and diagonal_left_right:
+        winning_symbol = slot_line_X[0][0]
+    elif second_row:
+        winning_symbol = slot_line_X[1][0]
+    elif third_row:
+        winning_symbol = slot_line_X[2][0]
+    elif diagonal_right_left:
+        winning_symbol = slot_line_X[0][2]
+
+    prize = symbol_prize[winning_symbol]
+    print(f"You win {prize}!")
+else:
+    print("No winning combination.")
+
+
 
 
 
